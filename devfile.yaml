@@ -1,0 +1,62 @@
+schemaVersion: 2.2.2
+metadata:
+  name: springboot-demo
+  version: 1.0.0
+  language: Java
+  projectType: springboot
+components:
+  - name: tools
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel8
+      memoryLimit: 3Gi
+      memoryRequest: 1Gi
+      cpuLimit: "2"
+      cpuRequest: 200m
+      mountSources: true
+      env:
+        - name: MAVEN_OPTS
+          value: "-Xmx1g"
+      endpoints:
+        - name: app
+          targetPort: 8080
+          exposure: public
+          protocol: https
+        - name: debug
+          targetPort: 5005
+          exposure: internal
+commands:
+  - id: build
+    exec:
+      label: Build
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/demo
+      commandLine: ./mvnw package -DskipTests
+      group:
+        kind: build
+        isDefault: true
+  - id: run
+    exec:
+      label: Run
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/demo
+      commandLine: ./mvnw spring-boot:run
+      group:
+        kind: run
+        isDefault: true
+  - id: debug
+    exec:
+      label: Debug
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/demo
+      commandLine: >-
+        ./mvnw spring-boot:run
+        -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      group:
+        kind: debug
+        isDefault: true
+  - id: test
+    exec:
+      label: Test
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/demo
+      commandLine: ./mvnw test
