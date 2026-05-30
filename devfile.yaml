@@ -29,7 +29,7 @@ commands:
     exec:
       label: Build
       component: tools
-      workingDir: ${PROJECT_SOURCE}/demo
+      workingDir: ${PROJECT_SOURCE}
       commandLine: ./mvnw package -DskipTests
       group:
         kind: build
@@ -38,7 +38,7 @@ commands:
     exec:
       label: Run
       component: tools
-      workingDir: ${PROJECT_SOURCE}/demo
+      workingDir: ${PROJECT_SOURCE}
       commandLine: ./mvnw spring-boot:run
       group:
         kind: run
@@ -47,7 +47,7 @@ commands:
     exec:
       label: Debug
       component: tools
-      workingDir: ${PROJECT_SOURCE}/demo
+      workingDir: ${PROJECT_SOURCE}
       commandLine: >-
         ./mvnw spring-boot:run
         -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
@@ -58,5 +58,5 @@ commands:
     exec:
       label: Test
       component: tools
-      workingDir: ${PROJECT_SOURCE}/demo
+      workingDir: ${PROJECT_SOURCE}
       commandLine: ./mvnw test
