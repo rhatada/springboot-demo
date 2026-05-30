@@ -24,10 +24,9 @@ components:
         - name: debug
           targetPort: 5005
           exposure: internal
-  - name: mta-tools
-      plugin:
-        # OpenShiftのプラグインレジストリから公式のMTA/Konveyor拡張を指定
-        id: redhat/vscode-mta/latest
+  - name: mta-vscode-extension
+    vscodePlugin:
+      id: redhat/vscode-mta/latest
 commands:
   - id: build
     exec:
