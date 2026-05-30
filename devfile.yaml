@@ -24,9 +24,6 @@ components:
         - name: debug
           targetPort: 5005
           exposure: internal
-  - name: mta-vscode-extension
-    plugin:
-      id: redhat/vscode-mta/latest
 commands:
   - id: build
     exec:
