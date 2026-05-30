@@ -25,7 +25,7 @@ components:
           targetPort: 5005
           exposure: internal
   - name: mta-vscode-extension
-    vscodePlugin:
+    plugin:
       id: redhat/vscode-mta/latest
 commands:
   - id: build
